@@ -1,5 +1,5 @@
-# Vex-scouter
-Grabs Vex (any program in robotevents.com so V5RC, VIQ, Etc.) Teams id's, Team numbers, Team names, Organization, Grade level, Location, Highest skills score, Higest Driver score, Highest Programming score, Awards, and Best rank in a tournement all with just a robotevents.com link. 
+# Vex-V5RC-scouter
+Grabs Vex V5RC Teams id's, Team numbers, Team names, Organization, Grade level, Location, Highest skills score, Higest Driver score, Highest Programming score, Awards, and Best rank in a tournement all with just a robotevents.com link. 
 
 all I kindly ask is for credit if you plan to copy this
 
