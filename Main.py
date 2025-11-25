@@ -102,10 +102,10 @@ def get_team_data(event_data):
                 return 0
             return max(v.get("score", 0) for v in runs if isinstance(v, dict))
 
-        highest_total = get_highest(nsession, skills_total)
         highest_driver = get_highest(nsession, skills_driver)
         highest_programming = get_highest(nsession, skills_programming)
-
+        total = highest_driver+highest_programming
+        
         awards = []
         url = f"https://www.robotevents.com/api/v2/teams/{t_id}/awards?season=197&per_page=250"
         while True:
@@ -147,7 +147,7 @@ def get_team_data(event_data):
 
         results.append({
             "team_id": t_id,
-            "highest_total_skills": highest_total,
+            "highest_total_skills": total,
             "highest_driver_skills": highest_driver,
             "highest_programming_skills": highest_programming,
             "awards": ", ".join(awards),
@@ -161,8 +161,8 @@ def save_teams_to_excel(event_data, team_data, filename):
     worksheet = workbook.active
     worksheet.append([
         "Team ID", "Team Number", "Team Name", "Organization", "Grade", "Location",
-        "Highest Skills Score", "Highest Driver", "Highest Programming",
-        "Awards", "Best Rank"
+        "Highest Total Skills Score", "Highest Driver", "Highest Programming",
+        "Best Rank", "Awards"
     ])
 
     td_map = {t["team_id"]: t for t in team_data}
@@ -189,8 +189,8 @@ def save_teams_to_excel(event_data, team_data, filename):
             t.get("highest_total_skills", ""),
             t.get("highest_driver_skills", ""),
             t.get("highest_programming_skills", ""),
-            t.get("awards", ""),
-            t.get("best_rank", "")
+            t.get("best_rank", ""),
+            t.get("awards", "")
         ])
 
     for column in worksheet.columns:
@@ -213,6 +213,7 @@ if __name__ == "__main__":
     edata = get_teams(URL)
     tdata = get_team_data(edata)
     save_teams_to_excel(edata, tdata, Filename)
+
 
 
 
